@@ -40,7 +40,7 @@ class PlantController extends Controller
     public function store(PlantStoreRequest $request)
     {
         try {
-            $photo_path = $request->file('photo')->store('plants');
+            $photo_path = $request->file('photo')->store('public/plants');
             Plant::create([
                 'name' => $request->name,
                 'watering_instructions' => $request->watering_instructions,
