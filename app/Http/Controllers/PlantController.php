@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\PlantService;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlantStoreRequest;
 use App\Models\Plant;
@@ -37,16 +38,15 @@ class PlantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PlantStoreRequest $request)
+    public function store(PlantStoreRequest $request, PlantService $plantService)
     {
         try {
-            $photo_path = $request->file('photo')->store('public/plants');
-            Plant::create([
-                'name' => $request->name,
-                'watering_instructions' => $request->watering_instructions,
-                'species' => $request->species,
-                'photo_name' => $photo_path
-            ]);
+            $plantService->storeNewPlant(
+                $request->name,
+                $request->species,
+                $request->watering_instructions,
+                $request->file('photo')
+            );
 
             return back()->with('success', 'Created the new plant successfully');
         } catch(Exception $e) {
