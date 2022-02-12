@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\PlantController@index');
-Route::resource('plant', 'App\Http\Controllers\PlantController');
+//Route::get('/', 'App\Http\Controllers\PlantController@index');
+//Route::resource('plant', 'App\Http\Controllers\PlantController');
