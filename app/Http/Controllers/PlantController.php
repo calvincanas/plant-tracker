@@ -12,14 +12,16 @@ class PlantController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(PlantService $plantService)
     {
-        $plants = Plant::all();
-        return view('plants.index', [
+        $plants = $plantService->fetchAllPlants();
+        
+        return response()->json([
             'plants' => $plants
         ]);
+
     }
 
     /**
@@ -35,8 +37,8 @@ class PlantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(PlantStoreRequest $request, PlantService $plantService)
     {
@@ -48,16 +50,26 @@ class PlantController extends Controller
                 $request->file('photo')
             );
 
-            return back()->with('success', 'Created the new plant successfully');
-        } catch(Exception $e) {
-            return back()->with('error', $e->getMessage());
+            $responseData = [
+                'status' => 'success',
+                'message' => 'Created the new plant successfully'
+            ];
+        } catch (\Exception $e) {
+            $responseData = [
+                'status' => 'error',
+                'message' => 'Error occurred. Please try  again.'
+            ];
         }
+
+        return response()->json($responseData);
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,7 +80,7 @@ class PlantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,8 +91,8 @@ class PlantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -91,7 +103,7 @@ class PlantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

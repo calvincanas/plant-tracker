@@ -2,10 +2,12 @@
 
 namespace App\Services\Plants;
 
-class PlantPhotoService {
+class PlantPhotoService
+{
 
     public function storeNewPlantPhoto($photo)
     {
-        return $photo->store('public/plants');
+        $photo->store('public/plants');
+        return $photo;
     }
 }
