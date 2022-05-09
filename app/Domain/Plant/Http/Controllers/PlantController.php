@@ -3,6 +3,7 @@
 namespace App\Domain\Plant\Http\Controllers;
 
 use App\Domain\Plant\Repositories\PlantRepository;
+use App\Domain\Plant\Services\CreatePlantService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlantStoreRequest;
 use App\Services\PlantService;
@@ -15,7 +16,7 @@ class PlantController extends Controller
         $this->repo = $repo;
     }
 
-    public function index(PlantService $plantService)
+    public function index()
     {
         $plants = $this->repo->getPlants();
 
@@ -34,13 +35,14 @@ class PlantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param PlantStoreRequest $request
+     * @param CreatePlantService $createPlantService
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(PlantStoreRequest $request, PlantService $plantService)
+    public function store(PlantStoreRequest $request, CreatePlantService $createPlantService)
     {
         try {
-            $plantService->storeNewPlant(
+            $createPlantService->create(
                 $request->name,
                 $request->species,
                 $request->watering_instructions,
