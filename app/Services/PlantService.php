@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Plant;
+use App\Domain\Plant\Plant;
 use App\Services\Plants\PlantPhotoService;
 use Illuminate\Support\Facades\Cache;
 

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('plant', 'App\Http\Controllers\PlantController');
+Route::resource('plant', 'App\Domain\Plant\Http\Controllers\PlantController');

@@ -2,12 +2,10 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\Plant;
+use App\Domain\Plant\Plant;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Storage;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class PlantControllerTest extends TestCase
