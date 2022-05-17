@@ -1,4 +1,1 @@
-- install the project using [Laravel Sail](https://laravel.com/docs/8.x/sail)
-- This will take care most of the setup needed.
-- Make sure the database migration happen by running ``php artisan migrate``
-- Visit the site at [laravel.test](http://laravel.test)
+# Plant Tracker
